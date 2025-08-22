@@ -1,0 +1,68 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Python: train",
+            "type": "python",
+            "request": "launch",
+            "program": "/usr/local/envs/cylinder3d_6v/lib/python3.8/site-packages/torch/distributed/launch.py", //"${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--master_port=53218",
+                "--nproc_per_node=1",
+                "./tools/train.py",
+                // "projects/configs/nuscenes/cylinder3d_4xb4-3x_nuscenes.py",
+                "projects/configs/baselines/Multimodal-R50_img1600_128x128x10.py",
+                // "./projects/configs/nuscenes/Fusion_0075_refactor_mmdet3d11.py",
+                "--launcher=pytorch"
+            ],
+            "cwd": "${workspaceRoot}",
+            "env": {
+                // "CUDA_LAUNCH_BLOCKING": "1",
+                "PYTHONPATH": "${workspaceRoot}",
+                "CUDA_VISIBLE_DEVICES": "3",
+                "TORCH_DISTRIBUTED_DEBUG": "INFO",
+                "NCCL_ASYNC_ERROR_HANDLING": "1"
+            },
+            "envFile": "${workspaceRoot}/.env"
+        },
+        {
+            "name": "Python: train deepfuse",
+            "type": "python",
+            "request": "launch",
+            "program": "/usr/local/envs/cylinder3d_6v/lib/python3.8/site-packages/torch/distributed/launch.py", //"${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--master_port=53218",
+                "--nproc_per_node=1",
+                "./tools/train.py",
+                // "projects/configs/nuscenes/cylinder3d_4xb4-3x_nuscenes.py",
+                "projects/configs/baselines/Multimodal-R50_img1600_128x128x10_deepfuse.py",
+                // "./projects/configs/nuscenes/Fusion_0075_refactor_mmdet3d11.py",
+                "--launcher=pytorch"
+            ],
+            "cwd": "${workspaceRoot}",
+            "env": {
+                // "CUDA_LAUNCH_BLOCKING": "1",
+                "PYTHONPATH": "${workspaceRoot}",
+                "CUDA_VISIBLE_DEVICES": "3",
+                "TORCH_DISTRIBUTED_DEBUG": "INFO",
+                "NCCL_ASYNC_ERROR_HANDLING": "1"
+            },
+            "envFile": "${workspaceRoot}/.env"
+        },
+    ]
+}
